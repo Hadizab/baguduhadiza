@@ -4268,6 +4268,19 @@ var $mcj = jQuery.noConflict(true);
             gap: 0.25rem;
           }
         }
+    html, body {
+    overflow-x: hidden;
+    max-width: 100%;
+}
+
+img, video, iframe, table {
+    max-width: 100%;
+    height: auto;
+}
+
+* {
+    box-sizing: border-box;
+}
       </style>
 
 
@@ -4700,6 +4713,21 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
 })();
+  // Add this to your site's <head> or main JS file
+document.addEventListener('DOMContentLoaded', function() {
+    // Prevent horizontal overflow
+    document.body.style.overflowX = 'hidden';
+    
+    // Find and fix elements causing overflow
+    const allElements = document.querySelectorAll('*');
+    allElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.width > window.innerWidth) {
+            el.style.maxWidth = '100%';
+            el.style.boxSizing = 'border-box';
+        }
+    });
+});
 </script>
 </body>
 </html>
