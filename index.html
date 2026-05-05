@@ -2708,6 +2708,8 @@ crossorigin="anonymous"></script>
     <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #E2D4C5;">
       <p style="font-size: 0.85rem; color: #8A6F4C; font-style: italic; margin-bottom: 0.3rem;"><strong>©️ 2025 Hadiza Bagudu</strong></p>
       <p style="font-size: 0.8rem; color: #9E8262;">From my latest collection: <em>Ripples</em></p>
+<a href="https://hadizab.github.io/Leave-a-Review/" target="_blank" style="display: inline-block; margin-top: 0.8rem; color: #8A6F4C; border-bottom: 1px dotted #DCCFBF; font-size: 0.85rem; text-decoration: none;"><strong>Leave a Review</strong></a><br>
+
       <a href="https://hadizab.github.io/ripples-/" target="_blank" style="display: inline-block; margin-top: 0.8rem; color: #8A6F4C; border-bottom: 1px dotted #DCCFBF; font-size: 0.85rem; text-decoration: none;">Read full collection →</a>
     </div>
   </div>
@@ -2740,6 +2742,8 @@ crossorigin="anonymous"></script>
     <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #E2D4C5;">
       <p style="font-size: 0.85rem; color: #8A6F4C; font-style: italic; margin-bottom: 0.3rem;"><strong>©️ 2023 Hadiza Bagudu</strong></p>
       <p style="font-size: 0.8rem; color: #9E8262;">From my collection: <em>The Quiet Parts</em> (2024)</p>
+<a href="https://hadizab.github.io/Leave-a-Review/" target="_blank" style="display: inline-block; margin-top: 0.8rem; color: #8A6F4C; border-bottom: 1px dotted #DCCFBF; font-size: 0.85rem; text-decoration: none;"><strong>Leave a Review</strong></a><br>
+
       <a href="https://hadizab.github.io/quietparts/" target="_blank" style="display: inline-block; margin-top: 0.8rem; color: #8A6F4C; border-bottom: 1px dotted #DCCFBF; font-size: 0.85rem; text-decoration: none;">Read full collection →</a>
     </div>
   </div>
@@ -2768,6 +2772,8 @@ crossorigin="anonymous"></script>
     <div style="text-align: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #E2D4C5;">
       <p style="font-size: 0.85rem; color: #8A6F4C; font-style: italic; margin-bottom: 0.3rem;"><strong>©️ Hadiza Bagudu 2008</strong></p>
       <p style="font-size: 0.8rem; color: #9E8262;">From my collection: <em>With Love</em> (2008)</p>
+<a href="https://hadizab.github.io/Leave-a-Review/" target="_blank" style="display: inline-block; margin-top: 0.8rem; color: #8A6F4C; border-bottom: 1px dotted #DCCFBF; font-size: 0.85rem; text-decoration: none;"><strong>Leave a Review</strong></a><br>
+
       <a href="https://hadizab.github.io/withlove/" target="_blank" style="display: inline-block; margin-top: 0.8rem; color: #8A6F4C; border-bottom: 1px dotted #DCCFBF; font-size: 0.85rem; text-decoration: none;">Read full collection →</a>
     </div>
   </div>
@@ -4642,6 +4648,58 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Hadiza Bagudu website loaded - everything working!');
 });
 
+(function() {
+  // CONFIG
+  var REVIEW_URL = "https://hadizab.github.io/Leave-a-Review/";
+  var LINK_TEXT = "Leave a Review";
+  var TARGET = "_blank";
+
+  function addReviewLinks() {
+    var poems = document.querySelectorAll('article.poem-card');
+    
+    poems.forEach(function(poem) {
+      // Skip if already has a review link (prevent duplicates)
+      if (poem.querySelector('.review-link-wrapper-auto')) return;
+
+      var wrapper = document.createElement('div');
+      wrapper.className = 'review-link-wrapper-auto';
+
+      var link = document.createElement('a');
+      link.href = REVIEW_URL;
+      link.className = 'review-link-auto';
+      link.target = TARGET;
+      link.innerHTML = '<i>' + LINK_TEXT + '</i>';
+
+      wrapper.appendChild(link);
+
+      // Insert at the end of the poem, before copyright
+      var copyright = poem.querySelector('.copyright');
+      if (copyright) {
+        poem.insertBefore(wrapper, copyright);
+      } else {
+        poem.appendChild(wrapper);
+      }
+    });
+  }
+
+  // Run when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', addReviewLinks);
+  } else {
+    addReviewLinks();
+  }
+
+  // Also run when poems become visible (for tabbed/dynamic content)
+  var observer = new MutationObserver(function(mutations) {
+    addReviewLinks();
+  });
+  
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+
+})();
 </script>
 </body>
 </html>
